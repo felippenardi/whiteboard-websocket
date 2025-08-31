@@ -1,7 +1,8 @@
+//server.js:
 import { Server } from '@hocuspocus/server'
 
 const host = process.env.HP_HOST || '0.0.0.0'
-const port = Number(process.env.HP_PORT || process.env.PORT || 1234)
+const port = Number(process.env.PORT || process.env.HP_PORT || 1234)
 
 const server = Server.configure({
   address: host,
@@ -24,4 +25,3 @@ server.listen().then(() => {
   console.error('[hocuspocus] failed to start:', err)
   process.exit(1)
 })
-

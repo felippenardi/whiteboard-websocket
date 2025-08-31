@@ -1,17 +1,28 @@
-# Fly.io app configuration for whiteboard-websocket
-# Update 'app' with your unique app name on Fly
+# fly.toml app configuration file generated for whiteboard-websocket on 2025-08-31T16:43:24-03:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
 
-app = "whiteboard-websocket"
-primary_region = "iad"
+app = 'whiteboard-websocket'
+primary_region = 'mia'
 
-[env]
-  HP_HOST = "0.0.0.0"
-  HP_PORT = "1234"
-  PORT = "1234"
+[build]
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = 'stop'
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ['app']
+
+[[vm]]
+  memory = '1gb'
+  cpu_kind = 'shared'
+  cpus = 1
 
 [[services]]
   internal_port = 1234
-  protocol = "tcp"
 
   [[services.ports]]
     port = 80
@@ -20,9 +31,3 @@ primary_region = "iad"
   [[services.ports]]
     port = 443
     handlers = ["tls", "http"]
-
-  [services.concurrency]
-    type = "connections"
-    hard_limit = 500
-    soft_limit = 400
-

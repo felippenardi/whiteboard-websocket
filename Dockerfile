@@ -1,18 +1,15 @@
-FROM node:18-alpine
+FROM node:20
 
 WORKDIR /app
 
-COPY package.json package-lock.json* pnpm-lock.yaml* yarn.lock* ./
-
-RUN npm ci --omit=dev || npm install --omit=dev
+COPY package*.json ./
+RUN npm ci --only=production
 
 COPY . .
 
+ENV NODE_ENV=production
 ENV HP_HOST=0.0.0.0
-ENV HP_PORT=1234
-ENV PORT=1234
 
-EXPOSE 1234
-
+# Fly will inject PORT. Default fallback keeps local runs easy.
+EXPOSE 8080
 CMD ["node", "server.mjs"]
-
