@@ -1,0 +1,28 @@
+# Fly.io app configuration for whiteboard-websocket
+# Update 'app' with your unique app name on Fly
+
+app = "whiteboard-websocket"
+primary_region = "iad"
+
+[env]
+  HP_HOST = "0.0.0.0"
+  HP_PORT = "1234"
+  PORT = "1234"
+
+[[services]]
+  internal_port = 1234
+  protocol = "tcp"
+
+  [[services.ports]]
+    port = 80
+    handlers = ["http"]
+
+  [[services.ports]]
+    port = 443
+    handlers = ["tls", "http"]
+
+  [services.concurrency]
+    type = "connections"
+    hard_limit = 500
+    soft_limit = 400
+

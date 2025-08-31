@@ -1,0 +1,17 @@
+{
+  "name": "whiteboard-websocket",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=18.17 <21"
+  },
+  "scripts": {
+    "start": "node server.mjs",
+    "dev": "HP_HOST=0.0.0.0 HP_PORT=1234 node server.mjs"
+  },
+  "dependencies": {
+    "@hocuspocus/server": "^2.15.0"
+  }
+}
+
